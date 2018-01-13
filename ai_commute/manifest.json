@@ -1,0 +1,36 @@
+{
+    "manifest_version": 2,
+    "name": "AI Commmute Extension",
+    "version": "0.0.1",
+    "description": "Commutes a person on chat with Cleverbot AI",
+    "icons": {
+        "128": "icon128.png",
+        "48": "icon48.png",
+        "16": "icon16.png"
+    },
+    "page_action": {
+        "default_icon": "icon16.png",
+        "default_popup": "popup.html",
+        "default_title": "AI"
+    },
+    "background": {
+        "scripts": ["eventPage.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.omegle.com/*"],
+            "js": ["target.js", "jquery-3.2.1.min.js"]
+        },
+        {
+            "matches": ["https://www.cleverbot.com/*"],
+            "js": ["server.js", "jquery-3.2.1.min.js"]
+        }
+    ],
+    "permissions": [
+        "storage",
+        "tabs",
+        "https://www.omegle.com/*",
+        "https://www.cleverbot.com/*"
+    ]
+}
