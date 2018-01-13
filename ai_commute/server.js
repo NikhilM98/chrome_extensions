@@ -25,7 +25,7 @@ var checkBotMsg = () => {
                     botMsg: lastBotMsg
                 });
                 console.log(lastBotMsg);
-            }, 8000);
+            }, 10000);
         } else {
             checkBotMsg();
         }

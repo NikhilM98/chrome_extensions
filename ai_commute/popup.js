@@ -1,6 +1,6 @@
 $( () => {
     $('#btnStart').click(() => {
-        var userMsg = "testing", botMsg ="Hey";
+        var userMsg = "testing", botMsg ="Hey f19";
         $('#btnStart').attr("disabled", "disabled");
         // chrome.tabs.query(
         //     {url: ["https://www.cleverbot.com/*"]},

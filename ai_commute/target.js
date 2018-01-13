@@ -5,23 +5,36 @@ var submitMingForm = (form) => {
     checkTargetMsg();
 };
 
+var saveMsg = () => {
+    console.log('SaveMsg');
+    console.log('targetMsg', targetMsg);
+    if (lastTargetMsg != targetMsg) {
+        chrome.runtime.sendMessage({
+            turn: "bot",
+            userMsg: lastTargetMsg
+        });
+        console.log(lastTargetMsg);
+    } else {
+        checkTargetMsg();
+    };
+};
+
 var checkTargetMsg = () => {
     console.log('Waiting for reply');
     setTimeout(() => {
-        var targetMsg = req.userMsg;
-        var targetArray = document.getElementsByClassName('strangermsg');
+        targetMsg = req.userMsg;
+        targetArray = document.getElementsByClassName('strangermsg');
+        console.log(targetArray);
         if (targetArray.length != 0) {
-            var lastTargetMsg = targetArray[targetArray.length-1].lastChild.innerHTML;
+            lastTargetMsg = targetArray[targetArray.length-1].lastChild.innerHTML;
+            console.log('lastTargetMsg', lastTargetMsg);
+            saveMsg();
         } else {
-            var lastTargetMsg = "";
-        }
-        if (lastTargetMsg != targetMsg) {
-            chrome.runtime.sendMessage({
-                turn: "bot",
-                userMsg: lastTargetMsg
-            });
-            console.log(lastTargetMsg);
-        }
+            lastTargetMsg = "Hello"; //Make it random
+            console.log('lastTargetMsg', "else");
+            saveMsg();
+        };
+        
     }, 100);
 }
 
@@ -44,7 +57,7 @@ var giveCleverReply = () => {
     }
 };
 
-var newBotMsg, mingForm, req; 
+var newBotMsg, mingForm, req, lastTargetMsg, targetMsg, targetArray; 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.turn == "target") {
         req = request;
