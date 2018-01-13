@@ -1,0 +1,31 @@
+{
+    "manifest_version": 2,
+    "name": "PageManager Extension",
+    "version": "1.0",
+    "description": "Changes style of a specific page",
+    "icons": {
+        "128": "icon128.png",
+        "48": "icon48.png",
+        "16": "icon16.png"
+    },
+    "page_action": {
+        "default_icon": "icon16.png",
+        "default_popup": "popup.html",
+        "default_title": "PageStyle"
+    },
+    "background": {
+        "scripts": ["eventPage.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*"],
+            "js": ["content.js", "jquery-3.2.1.min.js"],
+            "css": ["content.css"]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "https://github.com/*"
+    ]
+}
